@@ -7,6 +7,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: echo "Hello, ${{ inputs.message }}"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and Test
+        run: |
+          # Add build and test commands here
+          echo "Building the project..."
+          npm install
+          npm run build
 
