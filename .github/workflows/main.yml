@@ -19,6 +19,5 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.repository }}
           fromTag: "v1.0.0"
-          toTag: "v2.0.0"
           outputFile: CHANGELOG.md
 
