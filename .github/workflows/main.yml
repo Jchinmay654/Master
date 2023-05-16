@@ -21,3 +21,4 @@ jobs:
           fromTag: "v1.0.0"
           toTag: "v2.0.0"
           outputFile: CHANGELOG.md
+
