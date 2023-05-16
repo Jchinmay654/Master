@@ -18,6 +18,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           owner: ${{ github.repository_owner }}
           repo: ${{ github.repository }}
-          fromTag: "v1.0.0"
           outputFile: CHANGELOG.md
 
