@@ -1,0 +1,23 @@
+name: main
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  release-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+      - uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.repository }}
+          fromTag: ${{ github.event.pull_request.base.sha }}
+          toTag: ${{ github.event.pull_request.head.sha }}
+          outputFile: CHANGELOG.md
