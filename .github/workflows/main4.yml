@@ -1,0 +1,27 @@
+name: Release Changelog Builder
+
+on:
+  push:
+    branches: '*'
+    tags: '*'
+    
+  pull_request:
+    types:
+      - opened
+      - closed
+
+jobs:
+  generate_changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Release Changelog Builder
+        run: npx release-changelog-builder install
+
+      - name: Generate Changelog
+        run: npx release-changelog-builder generate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
