@@ -1,4 +1,4 @@
-name: Generate changelog
+name: great success
 on:
   push: 
    branches: '*'
