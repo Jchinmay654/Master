@@ -8,4 +8,6 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["node", "index.js"sfsf]
+CMD ["node", "index.js"]
+
+sssssss
