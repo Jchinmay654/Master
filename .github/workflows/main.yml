@@ -6,6 +6,7 @@ on:
       - closed
   push:
     branches: '*'
+    tags: '*'
 jobs:
   release-changelog:
     runs-on: ubuntu-latest
