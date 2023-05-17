@@ -3,7 +3,7 @@ name: Deploy to ECR
 on:
  
   push:
-    branches: [ main ]  
+    branches: 
   workflow_dispatch:
   workflow_call:    
 jobs:
