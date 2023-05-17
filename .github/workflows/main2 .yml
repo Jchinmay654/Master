@@ -4,8 +4,8 @@ on:
     types:
       - closed
   push:
-    branches: ['*']
-
+    branches: '*'
+    tags: '*'
 jobs:
   release:
     if: github.event.pull_request.merged == true
