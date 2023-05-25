@@ -20,7 +20,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1.1.4
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
@@ -43,4 +43,4 @@ jobs:
           # If the release does not exist but the tag does, setting this to true will remove the tag.
          # delete_orphan_tag: true
         env: 
-         GH_PAT: ${{ secrets.GH_PAT }}
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
