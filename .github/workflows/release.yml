@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
-      tag: ${{ needs.release_tag.outputs.tag }}
+      tag: ${{ needs.release.tag.outputs.tag }}
     steps:
       - uses: actions/checkout@v2
 
