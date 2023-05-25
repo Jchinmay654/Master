@@ -1,0 +1,44 @@
+name: Release and Rollback
+
+on:
+  workflow_dispatch:
+   inputs:
+     GH_PAT:
+       required: true
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      tag: ${{ needs.release_tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        with:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          tag_name: ${{ needs.release_tag.outputs.tag }}
+          release_name: Release ${{ needs.release_tag.outputs.tag }}
+          draft: false
+          prerelease: false
+
+  rollback:
+    name: Rollback Release
+    needs: release
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rollback Release
+        uses: author/action-rollback@stable
+        with:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          # Using a known release ID
+          release_id: ${{ needs.release.id }}
+          # Using a tag name
+          tag: ${{ needs.release.outputs.tag }}
+          # If the release does not exist but the tag does, setting this to true will remove the tag.
+          delete_orphan_tag: true
