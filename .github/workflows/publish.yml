@@ -10,8 +10,7 @@ jobs:
       - name: Tag
         id: autotagger
         uses: butlerlogic/action-autotag@stable
-        with:
-          GH_PAT: "${{ secrets.GH_PAT }}"
+        
       
       - name: Release
         id: create_release
