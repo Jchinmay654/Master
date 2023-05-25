@@ -7,19 +7,17 @@ jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      tag: ${{ needs.release.tag.outputs.tag }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1.0.0
+        uses: actions/create-release@v2.3.0
         env: 
           GH_PAT: ${{ secrets.GH_PAT }}
         with:   
-          tag_name: ${{ needs.release_tag.outputs.tag }}
-          release_name: Release ${{ needs.release_tag.outputs.tag }}
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           draft: false
           prerelease: false
 
@@ -37,6 +35,6 @@ jobs:
           # Using a tag name
           tag: ${{ needs.release.outputs.tag }}
           # If the release does not exist but the tag does, setting this to true will remove the tag.
-          delete_orphan_tag: true
+         # delete_orphan_tag: true
         env: 
          GH_PAT: ${{ secrets.GH_PAT }}
