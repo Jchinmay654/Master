@@ -7,9 +7,6 @@ jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      tag: ${{ needs.release.tag.outputs.tag }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Node.js 16
@@ -41,6 +38,6 @@ jobs:
           # Using a tag name
           tag: ${{ github.run_number }}
           # If the release does not exist but the tag does, setting this to true will remove the tag.
-          delete_orphan_tag: true
+          #delete_orphan_tag: true
         env: 
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
