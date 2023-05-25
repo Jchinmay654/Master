@@ -2,9 +2,6 @@ name: Release and Rollback
 
 on:
   workflow_dispatch:
-   inputs:
-     GH_PAT:
-       required: true
 
 jobs:
   release:
