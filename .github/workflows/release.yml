@@ -22,8 +22,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
 
@@ -37,9 +37,9 @@ jobs:
         uses: author/action-rollback@stable
         with:
           # Using a known release ID
-          release_id: ${{ needs.release.id }}
+          release_id: ${{ steps.create_release.id }}
           # Using a tag name
-          tag: ${{ needs.release.outputs.tag }}
+          tag: ${{ github.ref }}
           # If the release does not exist but the tag does, setting this to true will remove the tag.
          # delete_orphan_tag: true
         env: 
