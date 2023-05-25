@@ -10,8 +10,8 @@ jobs:
       - name: Tag
         id: autotagger
         uses: butlerlogic/action-autotag@stable
-        with: 
-         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         
       
       - name: Release
@@ -19,7 +19,7 @@ jobs:
         if: steps.autotagger.outputs.tagname != ''
         uses: actions/create-release@v1.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
         with:
           tag_name: ${{ steps.autotagger.outputs.tagname }}
           release_name: Version ${{ steps.autotagger.outputs.version }}
@@ -43,4 +43,4 @@ jobs:
           # Using a tag name
           tag: ${{ steps.autotagger.outputs.tagname }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
